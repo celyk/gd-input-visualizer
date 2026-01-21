@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8x8gtc6i4ocb"]
 
-[ext_resource type="Script" uid="uid://bbctamqlv5enm" path="res://script/KeyboardLayoutVisualizer.gd" id="1"]
+[ext_resource type="Script" uid="uid://bbctamqlv5enm" path="res://addons/InputVisualizer/script/KeyboardLayoutVisualizer.gd" id="1"]
 
 [node name="Control" type="Control" unique_id=1268966640]
 layout_mode = 3
@@ -10,8 +10,8 @@ anchor_right = 0.953037
 anchor_bottom = 0.980046
 offset_left = 48.0902
 offset_top = 11.9725
-offset_right = -68.90991
-offset_bottom = -337.0276
+offset_right = -413.90997
+offset_bottom = -406.0276
 script = ExtResource("1")
-src_path = "res://assets/keyboard_layouts/keyboard-ansi-104.json"
+src_path = "res://addons/InputVisualizer/assets/keyboard_layouts/keyboard-default.json"
 key_unit_size = 46
