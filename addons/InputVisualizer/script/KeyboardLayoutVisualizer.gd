@@ -5,10 +5,29 @@ class_name KeyboardLayoutVisualizer extends Control
 
 @export var key_unit_size = 10: set = set_key_unit_size
 
-var keyboard
+var keyboard : Keyboard
 var label_margin = Vector2.ONE
 
+var _keys_initial_colors : Dictionary
+
+func _input(event:InputEvent) -> void:
+	if not event is InputEventKey: return
 	
+	for key:KeyboardKey in keyboard.keys:
+		if key.labels.is_empty(): return
+		
+		var text_label : String = event.as_text_key_label()
+		
+		if text_label != "" and key.labels and key.labels[0]:
+			if text_label == key.labels[0]:
+				key.color = _keys_initial_colors[key.get_rect().position]
+				if event.is_pressed():
+					key.color = Color(key.color).darkened(0.3).to_html()
+				else:
+					pass
+	
+	queue_redraw()
+
 func _draw():
 	var rect = Rect2()
 	
@@ -48,6 +67,9 @@ func load_layout():
 	var src_text = src_file.get_as_text()
 	src_file.close()
 	keyboard = KeyboardSerial.parse(src_text)
+	
+	for key in keyboard.keys:
+		_keys_initial_colors[key.get_rect().position] = key.color
 
 func set_src_path(p):
 	src_path = p
