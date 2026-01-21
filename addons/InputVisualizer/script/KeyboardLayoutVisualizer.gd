@@ -8,6 +8,9 @@ class_name KeyboardLayoutVisualizer extends Control
 var keyboard : Keyboard
 var label_margin = Vector2.ONE
 
+signal key_down(keycode:int, rect:Rect2)
+signal key_up(keycode:int, rect:Rect2)
+
 var _keys_initial_colors : Dictionary
 
 func _input(event:InputEvent) -> void:
@@ -23,8 +26,9 @@ func _input(event:InputEvent) -> void:
 				key.color = _keys_initial_colors[key.get_rect().position]
 				if event.is_pressed():
 					key.color = Color(key.color).darkened(0.3).to_html()
+					key_down.emit(event.keycode, key.get_rect())
 				else:
-					pass
+					key_up.emit(event.keycode, key.get_rect())
 	
 	queue_redraw()
 
